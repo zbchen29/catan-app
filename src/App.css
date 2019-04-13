@@ -22,6 +22,16 @@
   color: #61dafb;
 }
 
+.turn {
+    transform: translateY(200px) rotate(30deg);
+    transition-duration: 1s;
+}
+
+.turn:hover {
+    transform: translateY(0) rotate(0);
+    transition-duration: 1s;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

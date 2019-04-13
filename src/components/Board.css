@@ -1,0 +1,11 @@
+.shifted {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.normal {
+    position:absolute;
+    top: 75px;
+    left: 43px;
+}
