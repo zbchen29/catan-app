@@ -49,14 +49,10 @@ class App extends Component {
         })
     }
 
-    // componentWillUnmount() {
-    //     clearTimeout(this.timerID);
-    // }
-
     render() {
         return (
             <div>
-                <div onClick={this.handleClick}>here</div>
+                <div onClick={this.handleClick}>Here</div>
                 <Board val={this.state.val} hexes={this.state.arr}/>
             </div>
         )

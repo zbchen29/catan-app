@@ -17,25 +17,7 @@ let tiles = {
 class Board extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     hexes : this.props.hexes
-        // }
     }
-
-    // refreshBoard() {
-    //     console.log("by");
-    //     this.setState({
-    //         hexes : [["M","M","M","M","M"],["M","M","M","P","M"],["M","M","M","D","D"],["M","M","M","M","D"]]
-    //     });
-    //     this.forceUpdate();
-    // }
-    //
-    // componentDidMount() {
-    //     this.timerID = setTimeout(
-    //         () => {this.refreshBoard()},
-    //         4000
-    //     );
-    // }
 
     render () {
         // Arrays for objects

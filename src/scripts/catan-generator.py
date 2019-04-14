@@ -687,6 +687,11 @@ if __name__ == '__main__':
     # board.display()
     print(json.dumps(board.create_boardlist()))
 
+    # board_list = [["F","F","F","F","F"],["F","D","F","F","F"],["F","F","F","F","F"],["F","F","F","F","F"]]
+    #
+    # # print(board_list)
+    # print(json.dumps(board_list))
+
     # scenario = None
     # players = None
     # valid = sorted(list(set([key[0] for key in board_presets.scenarios.keys()])))
