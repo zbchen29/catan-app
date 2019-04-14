@@ -20,29 +20,39 @@ import sea from "../images/sea.png";
 //     "sea" : 6
 // };
 
+let tilesName = ["desert", "field", "forest", "hill", "mountain", "pasture", "sea"];
 let tiles = [desert, field, forest, hill, mountain, pasture, sea];
 
 class Hex extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            // activeTile : parseInt(Math.floor(Math.random()*7))
-            activeTile : this.props.hex
-        };
+    // constructor (props) {
+    //     super(props);
+    //     this.state = {
+    //         // activeTile : parseInt(Math.floor(Math.random()*7))
+    //         activeTile : this.props.hex
+    //     };
+    //
+    //     this.changeTile = this.changeTile.bind(this);
+    // }
 
-        this.changeTile = this.changeTile.bind(this);
+    // changeTile() {
+    //     this.setState({
+    //         activeTile : (this.state.activeTile + 1) % 7
+    //     })
+    // }
+
+    constructor(props) {
+        super(props);
+        this.changeHex = this.changeHex.bind(this);
     }
 
-    changeTile() {
-        this.setState({
-            activeTile : (this.state.activeTile + 1) % 7
-        })
+    changeHex () {
+        this.props.updateFunc(this.props.row, this.props.col);
     }
 
     render () {
         return (
-            <div className="hex" onClick={this.changeTile}>
-                <img src={tiles[this.props.hex]} className="hex-image" alt="desert"/>
+            <div className="hex" onClick={this.changeHex}>
+                <img src={tiles[this.props.hex]} className="hex-image" alt={tilesName[this.props.hex]}/>
             </div>
         )
     }
