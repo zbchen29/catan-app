@@ -1,11 +1,17 @@
 .shifted {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 33px;
 }
 
-.normal {
+/* .normal {
     position:absolute;
     top: 75px;
     left: 43px;
+} */
+
+.normal {
+    position:absolute;
+    top: 56px;
+    left: 0px;
 }

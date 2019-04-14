@@ -1,9 +1,9 @@
-.hex {
+/* .hex {
     width: 87px;
     height: 100px;
     margin-top: 25px;
     margin-bottom: 25px;
-}
+} */
 
 .hex-image {
     position: relative;
@@ -12,6 +12,13 @@
     width: 100%;
     height: 100%;
     transition: filter 0.2s linear;
+}
+
+.hex {
+    width: 65px;
+    height: 75px;
+    margin-top: 19px;
+    margin-bottom: 19px;
 }
 
 .hex-image:hover {

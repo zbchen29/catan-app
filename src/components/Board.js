@@ -17,10 +17,25 @@ let tiles = {
 class Board extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            hexes : this.props.hexArray
-        }
+        // this.state = {
+        //     hexes : this.props.hexes
+        // }
     }
+
+    // refreshBoard() {
+    //     console.log("by");
+    //     this.setState({
+    //         hexes : [["M","M","M","M","M"],["M","M","M","P","M"],["M","M","M","D","D"],["M","M","M","M","D"]]
+    //     });
+    //     this.forceUpdate();
+    // }
+    //
+    // componentDidMount() {
+    //     this.timerID = setTimeout(
+    //         () => {this.refreshBoard()},
+    //         4000
+    //     );
+    // }
 
     render () {
         // Arrays for objects
@@ -30,20 +45,20 @@ class Board extends Component {
         let normal_buffer = [];
 
         // Iteratively build the rendered object
-        for (var i = 0; i < this.state.hexes.length; i++)
+        for (var i = 0; i < this.props.hexes.length; i++)
         {
-            for (var j = 0; j < this.state.hexes[0].length; j++)
+            for (var j = 0; j < this.props.hexes[0].length; j++)
             {
                 if (i % 2 === 0)
                 {
                     shifted_buffer.push(
-                        <Hex key={i*(this.state.hexes[0].length) + j} hex={tiles[this.state.hexes[i][j]]}/>
+                        <Hex key={i*(this.props.hexes[0].length) + j} hex={tiles[this.props.hexes[i][j]]}/>
                     );
                 }
                 else
                 {
                     normal_buffer.push(
-                        <Hex key={i*(this.state.hexes[0].length) + j} hex={tiles[this.state.hexes[i][j]]}/>
+                        <Hex key={i*(this.props.hexes[0].length) + j} hex={tiles[this.props.hexes[i][j]]}/>
                     );
                 }
             }
@@ -51,14 +66,14 @@ class Board extends Component {
             if (i % 2 === 0)
             {
                 shifted.push(
-                    <div key={this.state.hexes.length * this.state.hexes[0].length + i} className="d-flex flex-row">
+                    <div key={this.props.hexes.length * this.props.hexes[0].length + i} className="d-flex flex-row">
                         {shifted_buffer}
                     </div>
                 )
             }
             else {
                 normal.push(
-                    <div key={this.state.hexes.length * this.state.hexes[0].length + i} className="d-flex flex-row">
+                    <div key={this.props.hexes.length * this.props.hexes[0].length + i} className="d-flex flex-row">
                         {normal_buffer}
                     </div>
                 )
@@ -76,6 +91,7 @@ class Board extends Component {
                 <div className="normal">
                     {normal}
                 </div>
+                <div>{this.props.value}</div>
             </div>
         )
     }

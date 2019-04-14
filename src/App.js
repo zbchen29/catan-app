@@ -6,44 +6,58 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Board from './components/Board';
 
-// let arr = [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
-let arr = [["M","M","M","M","M"],["M","M","M","P","M"],["M","M","M","M","M"],["M","M","M","M","D"]]
-
-// class App extends Component {
-//     componentDidMount() {
-//         axios.get('/generator')
-//             .then((res) => {
-//                 arr = JSON.parse(res)
-//             })
-//             .catch((err) => {
-//                 console.log(err);
-//             })
-//     }
-//
-//     render() {
-//         return (
-//             <div>
-//                 <Board hexArray={arr}/>
-//             </div>
-//         )
-//     }
-// }
-
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            arr : [["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"],
+            ["M","M","M","M","M","M","M","M","M"]],
+            val : 0
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
     componentDidMount() {
         axios.get('/generator')
             .then((res) => {
-                arr = JSON.parse(res)
+                console.log(this.state.arr);
+                this.setState({
+                    arr : res.data
+                });
+                console.log(this.state.arr);
+                console.log("Success");
             })
             .catch((err) => {
                 console.log(err);
-            })
+            });
     }
+
+    handleClick() {
+        console.log("hi");
+        this.setState({
+            arr : [["M","M","M","M","M"],["M","M","M","M","M"],["M","M","M","M","M"],["M","M","M","M","D"]],
+            val : this.state.val+1
+        })
+    }
+
+    // componentWillUnmount() {
+    //     clearTimeout(this.timerID);
+    // }
 
     render() {
         return (
             <div>
-                Hi
+                <div onClick={this.handleClick}>here</div>
+                <Board val={this.state.val} hexes={this.state.arr}/>
             </div>
         )
     }

@@ -42,7 +42,7 @@ class Hex extends Component {
     render () {
         return (
             <div className="hex" onClick={this.changeTile}>
-                <img src={tiles[this.state.activeTile]} className="hex-image" alt="desert"/>
+                <img src={tiles[this.props.hex]} className="hex-image" alt="desert"/>
             </div>
         )
     }

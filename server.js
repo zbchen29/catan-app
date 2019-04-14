@@ -10,6 +10,10 @@ const port = process.env.PORT || 3000
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
 
+app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'src')));
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
@@ -19,7 +23,7 @@ app.get('/generator', (req, res) => {
     const pyProcess = spawn('python', [path.join(__dirname, 'src', 'scripts', 'catan-generator.py')]);
 
     pyProcess.stdout.on('data', (data) => {
-        res.json(data);
+        res.send(data);
     })
 })
 
