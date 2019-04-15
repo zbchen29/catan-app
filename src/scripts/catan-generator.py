@@ -674,18 +674,20 @@ if __name__ == '__main__':
               ['-','-','-','-','-','-','-','-','-'],
               ['-','-','-','H','H','H','-','-','-'],
               ['-','-','H','H','H','H','-','-','-'],
-              ['-','-','H','H','H','H','H','-','-'],
+              ['-','-','H','H','D','H','H','-','-'],
               ['-','-','H','H','H','H','-','-','-'],
               ['-','-','-','H','H','H','-','-','-'],
               ['-','-','-','-','-','-','-','-','-'],
               ['-','-','-','-','-','-','-','-','-']]
-    t = parse_boardlist(preset).create_template()
-    h = None
-    n = None
 
-    board = generate_fair(template=t, hexes=h, numbers=n)
-    # board.display()
-    print(json.dumps(board.create_boardlist()))
+    print(json.dumps(preset))
+    # t = parse_boardlist(preset).create_template()
+    # h = None
+    # n = None
+    #
+    # board = generate_fair(template=t, hexes=h, numbers=n)
+    # # board.display()
+    # print(json.dumps(board.create_boardlist()))
 
     # board_list = [["F","F","F","F","F"],["F","D","F","F","F"],["F","F","F","F","F"],["F","F","F","F","F"]]
     #
