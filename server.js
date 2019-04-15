@@ -7,13 +7,13 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Main
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
 // Generator API
 app.get('/generator', (req, res) => {
     const spawn = require('child_process').spawn;
-    const pyProcess = spawn('python', [path.join(__dirname, 'src', 'scripts', 'catan-generator.py')]);
+    const pyProcess = spawn('python', [path.join(__dirname, 'build', 'catan-generator.py')]);
 
     pyProcess.stdout.on('data', (data) => {
         res.send(data);
