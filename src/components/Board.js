@@ -3,17 +3,17 @@ import Hex from './Hex';
 import axios from 'axios';
 
 import "./Board.css";
-let tiles = ["desert", "field", "forest", "hill", "mountain", "pasture", "sea"];
+// let tiles = ["desert", "field", "forest", "hill", "mountain", "pasture", "sea"];
 
-// const tiles = {
-//     "D" : 0,
-//     "W" : 1,
-//     "F" : 2,
-//     "H" : 3,
-//     "M" : 4,
-//     "P" : 5,
-//     "-" : 6
-// };
+const tiles = {
+    "D" : 0,
+    "W" : 1,
+    "F" : 2,
+    "H" : 3,
+    "M" : 4,
+    "P" : 5,
+    "-" : 6
+};
 
 const tileTypeCount = 7;
 
@@ -35,37 +35,14 @@ class Board extends Component {
                         [6, 6, 6, 6, 6, 6, 6, 6, 6]]
         }
 
-        // this.generateBoard = this.generateBoard.bind(this);
+        this.generateBoard = this.generateBoard.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
         this.createBoardElement = this.createBoardElement.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
     }
 
     componentWillMount () {
-        axios.get('/generator')
-            .then((res) => {
-                let arr = res.data;
-                console.log(res);
-
-                for (var i = 0; i < arr.length; i++)
-                {
-                    for (var j = 0; j < arr[i].length; j++)
-                    {
-                        arr[i][j] = tiles[arr[i][j]]
-                    }
-                }
-
-                this.setState({
-                    height : arr.length,
-                    width : arr[0].length,
-                    hexArray : arr
-                });
-                // console.log(arr);
-                console.log("Successful board generation.");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        this.generateBoard();
     }
 
     generateBoard () {
