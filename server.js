@@ -4,10 +4,6 @@ const app = express();
 const port = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, 'build')));
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'src')));
-// app.use(express.static(path.join(__dirname, 'src', 'components')));
-// app.use(express.static(path.join(__dirname, 'src', 'images')));
 
 // Main
 app.get('/', (req, res) => {

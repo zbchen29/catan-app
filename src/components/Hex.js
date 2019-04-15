@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 
 import "./Hex.css";
 
-import desert from "../images/desert.png";
-import field from "../images/field.png";
-import forest from "../images/forest.png";
-import hill from "../images/hill.png";
-import mountain from "../images/mountain.png";
-import pasture from "../images/pasture.png";
-import sea from "../images/sea.png";
+// import desert from "../images/desert.png";
+// import field from "../images/field.png";
+// import forest from "../images/forest.png";
+// import hill from "../images/hill.png";
+// import mountain from "../images/mountain.png";
+// import pasture from "../images/pasture.png";
+// import sea from "../images/sea.png";
+
+import desert from "../images/desert_r.png";
+import field from "../images/field_r.png";
+import forest from "../images/forest_r.png";
+import hill from "../images/hill_r.png";
+import mountain from "../images/mountain_r.png";
+import pasture from "../images/pasture_r.png";
+import sea from "../images/sea_r.png";
 
 // let tilesNum = {
 //     "desert" : 0,
@@ -24,22 +32,6 @@ let tilesName = ["desert", "field", "forest", "hill", "mountain", "pasture", "se
 let tiles = [desert, field, forest, hill, mountain, pasture, sea];
 
 class Hex extends Component {
-    // constructor (props) {
-    //     super(props);
-    //     this.state = {
-    //         // activeTile : parseInt(Math.floor(Math.random()*7))
-    //         activeTile : this.props.hex
-    //     };
-    //
-    //     this.changeTile = this.changeTile.bind(this);
-    // }
-
-    // changeTile() {
-    //     this.setState({
-    //         activeTile : (this.state.activeTile + 1) % 7
-    //     })
-    // }
-
     constructor(props) {
         super(props);
         this.changeHex = this.changeHex.bind(this);

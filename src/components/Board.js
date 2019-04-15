@@ -3,17 +3,17 @@ import Hex from './Hex';
 import axios from 'axios';
 
 import "./Board.css";
-// let tiles = ["desert", "field", "forest", "hill", "mountain", "pasture", "sea"];
+let tiles = ["desert", "field", "forest", "hill", "mountain", "pasture", "sea"];
 
-const tiles = {
-    "D" : 0,
-    "W" : 1,
-    "F" : 2,
-    "H" : 3,
-    "M" : 4,
-    "P" : 5,
-    "-" : 6
-};
+// const tiles = {
+//     "D" : 0,
+//     "W" : 1,
+//     "F" : 2,
+//     "H" : 3,
+//     "M" : 4,
+//     "P" : 5,
+//     "-" : 6
+// };
 
 const tileTypeCount = 7;
 
@@ -35,12 +35,40 @@ class Board extends Component {
                         [6, 6, 6, 6, 6, 6, 6, 6, 6]]
         }
 
+        // this.generateBoard = this.generateBoard.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
         this.createBoardElement = this.createBoardElement.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
     }
 
     componentWillMount () {
+        axios.get('/generator')
+            .then((res) => {
+                let arr = res.data;
+                console.log(res);
+
+                for (var i = 0; i < arr.length; i++)
+                {
+                    for (var j = 0; j < arr[i].length; j++)
+                    {
+                        arr[i][j] = tiles[arr[i][j]]
+                    }
+                }
+
+                this.setState({
+                    height : arr.length,
+                    width : arr[0].length,
+                    hexArray : arr
+                });
+                // console.log(arr);
+                console.log("Successful board generation.");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    generateBoard () {
         axios.get('/generator')
             .then((res) => {
                 let arr = res.data;
@@ -58,6 +86,7 @@ class Board extends Component {
                     width : arr[0].length,
                     hexArray : arr
                 });
+                console.log(arr);
                 console.log("Successful board generation.");
             })
             .catch((err) => {
@@ -130,7 +159,7 @@ class Board extends Component {
         }
 
         return (
-            <div>
+            <div className="board-container mx-auto">
                 <div className="shifted">
                     {shifted}
                 </div>
@@ -146,74 +175,15 @@ class Board extends Component {
         return (
             <div>
                 { this.createBoardElement() }
+                <div className="d-flex flex-row mx-auto button-row justify-content-around">
+                    <div className="btn btn-secondary">Settings</div>
+                    <div className="btn btn-secondary">Clear</div>
+                    <div className="btn btn-secondary">Shuffle Nums</div>
+                    <div className="btn btn-success" onClick={this.generateBoard}>Generate</div>
+                </div>
             </div>
         )
     }
 }
-
-// class Board extends Component {
-//     constructor(props){
-//         super(props);
-//     }
-//
-//     render () {
-//         // Arrays for objects
-//         let shifted = [];
-//         let normal = [];
-//         let shifted_buffer = [];
-//         let normal_buffer = [];
-//
-//         // Iteratively build the rendered object
-//         for (var i = 0; i < this.props.hexes.length; i++)
-//         {
-//             for (var j = 0; j < this.props.hexes[0].length; j++)
-//             {
-//                 if (i % 2 === 0)
-//                 {
-//                     shifted_buffer.push(
-//                         <Hex key={i*(this.props.hexes[0].length) + j} hex={tiles[this.props.hexes[i][j]]}/>
-//                     );
-//                 }
-//                 else
-//                 {
-//                     normal_buffer.push(
-//                         <Hex key={i*(this.props.hexes[0].length) + j} hex={tiles[this.props.hexes[i][j]]}/>
-//                     );
-//                 }
-//             }
-//
-//             if (i % 2 === 0)
-//             {
-//                 shifted.push(
-//                     <div key={this.props.hexes.length * this.props.hexes[0].length + i} className="d-flex flex-row">
-//                         {shifted_buffer}
-//                     </div>
-//                 )
-//             }
-//             else {
-//                 normal.push(
-//                     <div key={this.props.hexes.length * this.props.hexes[0].length + i} className="d-flex flex-row">
-//                         {normal_buffer}
-//                     </div>
-//                 )
-//             }
-//
-//             shifted_buffer = [];
-//             normal_buffer = [];
-//         }
-//
-//         return (
-//             <div>
-//                 <div className="shifted">
-//                     {shifted}
-//                 </div>
-//                 <div className="normal">
-//                     {normal}
-//                 </div>
-//                 <div>{this.props.value}</div>
-//             </div>
-//         )
-//     }
-// }
 
 export default Board;
