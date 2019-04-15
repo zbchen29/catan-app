@@ -32,7 +32,8 @@ class Board extends Component {
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
-                        [6, 6, 6, 6, 6, 6, 6, 6, 6]]
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6]],
+            loading : false
         }
 
         this.generateBoard = this.generateBoard.bind(this);
@@ -46,6 +47,7 @@ class Board extends Component {
     }
 
     generateBoard () {
+        this.setState({loading : true});
         axios.get('/generator')
             .then((res) => {
                 let arr = res.data;
@@ -61,7 +63,8 @@ class Board extends Component {
                 this.setState({
                     height : arr.length,
                     width : arr[0].length,
-                    hexArray : arr
+                    hexArray : arr,
+                    loading : false
                 });
                 console.log(arr);
                 console.log("Successful board generation.");
@@ -156,7 +159,11 @@ class Board extends Component {
                     <div className="btn btn-secondary">Settings</div>
                     <div className="btn btn-secondary">Clear</div>
                     <div className="btn btn-secondary">Shuffle Nums</div>
-                    <div className="btn btn-success" onClick={this.generateBoard}>Generate</div>
+                    { (this.state.loading) ? (
+                        <div className="btn btn-success button-disable">Loading</div>
+                    ) : (
+                        <div className="btn btn-success" onClick={this.generateBoard}>Generate</div>
+                    )}
                 </div>
             </div>
         )

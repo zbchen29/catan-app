@@ -19,3 +19,7 @@
 .button-row {
     max-width: 400px;
 }
+
+.button-disable {
+    background-color : gray;
+}
