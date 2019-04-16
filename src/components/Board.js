@@ -37,6 +37,7 @@ class Board extends Component {
         }
 
         this.generateBoard = this.generateBoard.bind(this);
+        this.clearBoard = this.clearBoard.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
         this.createBoardElement = this.createBoardElement.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
@@ -46,6 +47,7 @@ class Board extends Component {
         this.generateBoard();
     }
 
+    // Gets a new random board from generator endpoint
     generateBoard () {
         this.setState({loading : true});
         axios.get('/generator')
@@ -72,6 +74,23 @@ class Board extends Component {
             .catch((err) => {
                 console.log(err);
             });
+    }
+
+    // Clears board with sea tiles
+    clearBoard () {
+        this.setState({
+            hexArray : [[6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6],
+                        [6, 6, 6, 6, 6, 6, 6, 6, 6]],
+            loading : false
+        })
     }
 
     // Used in Hex child to change tile on click
@@ -156,13 +175,13 @@ class Board extends Component {
             <div>
                 { this.createBoardElement() }
                 <div className="d-flex flex-row mx-auto button-row justify-content-around">
-                    <div className="btn btn-secondary">Settings</div>
-                    <div className="btn btn-secondary">Clear</div>
-                    <div className="btn btn-secondary">Shuffle Nums</div>
+                    <button className="btn btn-secondary" disabled>Settings</button>
+                    <button className="btn btn-secondary" disabled>Shuffle Nums</button>
+                    <button className="btn btn-secondary" onClick={this.clearBoard}>Clear</button>
                     { (this.state.loading) ? (
-                        <div className="btn btn-success button-disable">Loading</div>
+                        <button className="btn btn-success" disabled>Waiting...</button>
                     ) : (
-                        <div className="btn btn-success" onClick={this.generateBoard}>Generate</div>
+                        <button className="btn btn-success" onClick={this.generateBoard}>Generate</button>
                     )}
                 </div>
             </div>
