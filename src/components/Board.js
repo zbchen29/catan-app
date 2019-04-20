@@ -16,6 +16,7 @@ const tiles = {
 };
 
 const tileTypeCount = 7;
+const numberCount = 11;
 
 class Board extends Component {
     constructor(props) {
@@ -33,12 +34,25 @@ class Board extends Component {
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
                         [6, 6, 6, 6, 6, 6, 6, 6, 6]],
+            numArray : [[7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7]],
+            hexes : [1,4,4,3,3,4,71],
+            numbers : [1,2,2,2,2,2,2,2,2,1],
             loading : false
         }
 
         this.generateBoard = this.generateBoard.bind(this);
         this.clearBoard = this.clearBoard.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
+        this.incrementNum = this.incrementNum.bind(this);
         this.createBoardElement = this.createBoardElement.bind(this);
         this.incrementHex = this.incrementHex.bind(this);
     }
@@ -47,12 +61,70 @@ class Board extends Component {
         this.generateBoard();
     }
 
+    // generateBoard (fromBoard) {
+    //     let getParams = {};
+    //
+    //     if (fromBoard) {
+    //         hexes = [0,0,0,0,0,0,0];
+    //         nums = [0,0,0,0,0,0,0,0,0,0,0,0,0],
+    //         for (let row=0; row<this.state.height; row++)
+    //         {
+    //             for (let col=0; col<this.state.width; col++)
+    //             {
+    //                 hexes[this.state.board[row][col]] += 1;
+    //             }
+    //         }
+    //
+    //         getParams["template"] = JSON.stringify(this.state.hexArray);
+    //         getParams["hexes"] = JSON.stringify(hexes);
+    //     }
+    //     else {
+    //
+    //     }
+    //     this.setState({loading : true});
+    //     axios.get('/generator', {
+    //         params : {
+    //             fromBoard : fromBoard,
+    //             template: JSON.stringify(this.state.hexArray),
+    //             numbersTemplate: JSON.stringify(this.state.numArray),
+    //             hexes: JSON.stringify(this.state.hexes),
+    //             numbers: JSON.stringify(this.state.numbers),
+    //         }
+    //     })
+    //         .then((res) => {
+    //             let arr = res.data[0];
+    //
+    //             for (var i = 0; i < arr.length; i++)
+    //             {
+    //                 for (var j = 0; j < arr[i].length; j++)
+    //                 {
+    //                     arr[i][j] = tiles[arr[i][j]]
+    //                 }
+    //             }
+    //
+    //             this.setState({
+    //                 height : arr.length,
+    //                 width : arr[0].length,
+    //                 hexArray : arr,
+    //                 numArray : res.data[1],
+    //                 loading : false
+    //             });
+    //             console.log(arr);
+    //             console.log(res.data[1]);
+    //             console.log("Successful board generation.");
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }
+
     // Gets a new random board from generator endpoint
-    generateBoard () {
+    // fromBoard is use template as hexes tallies
+    generateBoard (fromBoard) {
         this.setState({loading : true});
         axios.get('/generator')
             .then((res) => {
-                let arr = res.data;
+                let arr = res.data[0];
 
                 for (var i = 0; i < arr.length; i++)
                 {
@@ -66,9 +138,11 @@ class Board extends Component {
                     height : arr.length,
                     width : arr[0].length,
                     hexArray : arr,
+                    numArray : res.data[1],
                     loading : false
                 });
                 console.log(arr);
+                console.log(res.data[1]);
                 console.log("Successful board generation.");
             })
             .catch((err) => {
@@ -89,6 +163,16 @@ class Board extends Component {
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
                         [6, 6, 6, 6, 6, 6, 6, 6, 6],
                         [6, 6, 6, 6, 6, 6, 6, 6, 6]],
+            numArray : [[7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7],
+                        [7, 7, 7, 7, 7, 7, 7, 7, 7]],
             loading : false
         })
     }
@@ -99,6 +183,15 @@ class Board extends Component {
         board[row][col] = (board[row][col] + 1) % tileTypeCount;
         this.setState({
             hexArray : board
+        });
+    }
+
+    // Used in Hex child to change number on click
+    incrementNum (row, col) {
+        let board = this.state.numArray;
+        board[row][col] = ((board[row][col] - 1) % numberCount) + 2;
+        this.setState({
+            numArray : board
         });
     }
 
@@ -119,9 +212,11 @@ class Board extends Component {
                         <Hex
                             key={i*(this.state.width) + j}
                             hex={this.state.hexArray[i][j]}
+                            num={this.state.numArray[i][j]}
                             row={i}
                             col={j}
-                            updateFunc={this.incrementHex}/>
+                            updateHexFunc={this.incrementHex}
+                            updateNumFunc={this.incrementNum}/>
                     );
                 }
                 else
@@ -130,9 +225,11 @@ class Board extends Component {
                         <Hex
                             key={i*(this.state.width) + j}
                             hex={this.state.hexArray[i][j]}
+                            num={this.state.numArray[i][j]}
                             row={i}
                             col={j}
-                            updateFunc={this.incrementHex}/>
+                            updateHexFunc={this.incrementHex}
+                            updateNumFunc={this.incrementNum}/>
                     );
                 }
             }

@@ -353,8 +353,16 @@ class CatanBoard:
             for col in range(self.width):
                 row_list.append(self.board[row][col].string)
             boardlist.append(row_list)
-            row_list = []
         return boardlist
+
+    def create_num_boardlist(self):
+        num_boardlist = []
+        for row in range(self.height):
+            row_list =[]
+            for col in range(self.width):
+                row_list.append(self.board[row][col].number)
+            num_boardlist.append(row_list)
+        return num_boardlist
 
     def display_details(self):
         print('Variety Score:', self.variety_score())
@@ -673,14 +681,12 @@ if __name__ == '__main__':
               ['-','-','-','-','-','-','-','-','-'],
               ['-','-','-','-','-','-','-','-','-']]
 
-    # print(json.dumps(preset))
     t = parse_boardlist(preset).create_template()
     h = None
     n = None
-    #
+
     board = generate_fair(template=t, hexes=h, numbers=n)
-    # board.display()
-    print(json.dumps(board.create_boardlist()))
+    print(json.dumps([board.create_boardlist(), board.create_num_boardlist()]))
 
     # board_list = [["F","F","F","F","F"],["F","D","F","F","F"],["F","F","F","F","F"],["F","F","F","F","F"]]
     #
